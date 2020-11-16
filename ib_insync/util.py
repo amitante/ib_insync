@@ -365,7 +365,7 @@ def sleep(secs: float = 0.02) -> bool:
     Args:
         secs (float): Time in seconds to wait.
     """
-    run(asyncio.sleep(secs))
+    run(asyncio.sleep(secs), timeout=secs+2)  # Amit: added timeout just in case
     return True
 
 
