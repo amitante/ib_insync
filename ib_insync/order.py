@@ -317,7 +317,10 @@ class Trade:
 
     def remaining(self):
         """Number of shares remaining to be filled."""
-        return self.order.totalQuantity - self.filled()
+        if self.orderStatus.status == OrderStatus.Filled:  # due to ib bug, self.order.totalQuantity changes to 0 when order is filled ? so remaining returns negative
+            return 0
+        else:
+            return self.order.totalQuantity - self.filled()
 
 
 class BracketOrder(NamedTuple):
