@@ -669,6 +669,7 @@ class IB:
         Args:
             order: The order to be canceled.
         """
+        # Note this must be called from main thread, because ibinsync does throtelling and may schedule a task at a future time if too many orders..
         self.client.cancelOrder(order.orderId)
         now = datetime.datetime.now(datetime.timezone.utc)
         key = self.wrapper.orderKey(
